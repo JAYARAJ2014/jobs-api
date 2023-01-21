@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 interface IUser {
   username: string;
@@ -31,5 +32,9 @@ const UserSchema = new Schema<IUser>({
     required: [true, 'Password must be provided']
   }
 });
+UserSchema.pre("save",async function name() {
+ const salt = await bcrypt.genSalt(10); 
+ this.password = await bcrypt.hash(this.password,salt)
 
+})
 export const User = model<IUser>('User', UserSchema);
