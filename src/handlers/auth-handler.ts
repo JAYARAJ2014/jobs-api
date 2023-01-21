@@ -12,8 +12,11 @@ class AuthHandler {
     }
     
     const user = await User.create({ ...req.body });
+    const token = jwt.sign({userId: user._id, name: user.username},process.env.JWT_SECRET as string, {
+      expiresIn: '30d'
+    })
     console.log(`User Created:  `, user);
-    return res.status(StatusCodes.OK).json(user);
+    return res.status(StatusCodes.OK).json({name:username,token});
   }
   public async login(req: Request, res: Response) {}
   // public async userInfo(req: Request, res: Response) {
