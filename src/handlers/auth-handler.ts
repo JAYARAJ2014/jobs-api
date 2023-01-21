@@ -4,6 +4,7 @@ import { User } from '../models/user';
 import { StatusCodes } from 'http-status-codes';
 import { BadRequestError } from '../custom-errors/bad-request-error';
 import bcrypt from 'bcryptjs';
+import { UnAuthorizedError } from '../custom-errors/unauthorized-error';
 class AuthHandler {
   public async register(req: Request, res: Response) {
     const { username, email, password } = req.body;
@@ -18,27 +19,34 @@ class AuthHandler {
     console.log(`User Created:  `, user);
     return res.status(StatusCodes.OK).json({name:username,token});
   }
-  public async login(req: Request, res: Response) {}
-  // public async userInfo(req: Request, res: Response) {
-  //   return res.status(StatusCodes.OK).json(`Hello ${req.currentUser}`);
-  // }
-  // public async auth(req: Request, res: Response) {
-  //   console.log(req.headers);
-  //   const luckyNumber = Math.floor(Math.random() * 100);
+  public async login(req: Request, res: Response) {
 
-  //   const { username, password } = req.body;
+    const {email, password } = req.body;
+    if ( !password || !email) {
+      throw new BadRequestError('email / Password must be provided.');
+    }
+    
+    const user = await User.findOne({email});
+    if(!user){
+      throw new UnAuthorizedError('User does not exist')
+    }
 
-  //   if (!username || !password) {
-  //     throw new BadRequestError('Invalid user name or password ');
-  //   }
-  //   console.log(`Secret... ${process.env.JWT_SECRET}`);
-  //   const secret: string = process.env.JWT_SECRET as string;
-  //   const token = jwt.sign({ username }, secret, { expiresIn: '1d' });
-  //   console.log(`Token : ${token}`);
-  //   return res
-  //     .status(StatusCodes.OK)
-  //     .json({ msg: 'Success', luckyNumber: luckyNumber, token: token });
-  // }
+    // Compared the passwords
+
+   const isPasswordsMatching = await bcrypt.compare(password,user.password);
+
+   if (isPasswordsMatching) {
+    const token = jwt.sign({userId: user._id, name: user.username},process.env.JWT_SECRET as string, {
+      expiresIn: process.env.JWT_LIFE_TIME as string
+    })
+    
+   return res.status(StatusCodes.OK).json({name:user.username,token});
+   }
+
+   throw new UnAuthorizedError("Invalid Password")
+    
+  }
+  
 }
 
 export const authHandler = new AuthHandler();

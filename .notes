@@ -1,0 +1,24 @@
+// Register
+{
+    "username":"Emily Dickins",
+    "email": "emily@123.com",
+    "password" : "hello123l"
+}
+
+{
+    "name": "Emily Dickins",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2NjNDBjMGUwNGE5YTVlMzIwODZjZmUiLCJuYW1lIjoiRW1pbHkgRGlja2lucyIsImlhdCI6MTY3NDMzMDMwNCwiZXhwIjoxNjc2OTIyMzA0fQ.HoMZMiXRW1OOdRQMOSRtuhNg3twM9d0Uj819SK7YWLU"
+}
+
+
+//Login
+{
+    "username":"Emily Dickins",
+    "email": "emily@123.com",
+    "password" : "hello123l"
+}
+
+{
+    "name": "Emily Dickins",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2NjNDBjMGUwNGE5YTVlMzIwODZjZmUiLCJuYW1lIjoiRW1pbHkgRGlja2lucyIsImlhdCI6MTY3NDMzMDM1NywiZXhwIjoxNjc2OTIyMzU3fQ.Bj_R7oWjYeI4A0Z8Mjmv_lClmKqLDajYFkUXvx4Mec0"
+}
