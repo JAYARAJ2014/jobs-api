@@ -7,5 +7,5 @@ import { authMiddleware } from '../middlewares/auth';
 
 export const authRouter: Router = Router();
 
-authRouter.post('/api/auth', handleAsync(authHandler.auth));
-authRouter.get('/api/auth', authMiddleware, handleAsync(authHandler.userInfo));
+authRouter.post('/login', handleAsync(authHandler.login));
+authRouter.post('/register', handleAsync(authHandler.register));

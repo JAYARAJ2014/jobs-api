@@ -7,7 +7,7 @@ export const handleAsync = (fn: Function) => {
     try {
       await fn(req, res, next);
     } catch (error) {
-           next(error);
+      next(error);
     }
   };
 };

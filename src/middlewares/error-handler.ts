@@ -7,8 +7,8 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  if(err  instanceof CustomApiError){
-    return res.status(err.statusCode).json({msg: err.message})
+  if (err instanceof CustomApiError) {
+    return res.status(err.statusCode).json({ msg: err.message });
   }
   return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ messgae: err });
 };

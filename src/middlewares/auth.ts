@@ -12,7 +12,7 @@ export const authMiddleware = (
   console.log(authorization);
   if (!authorization || !authorization.startsWith('Bearer ')) {
     req.currentUser = '';
-    throw new  UnAuthorizedError('Invalid Token. Access Denied' );
+    throw new UnAuthorizedError('Invalid Token. Access Denied');
   }
   const token = authorization.substring(7);
   try {
@@ -26,6 +26,6 @@ export const authMiddleware = (
   } catch (error) {
     req.currentUser = '';
     console.log(`Error in verifying JWT `, error);
-    throw new  UnAuthorizedError('Invalid Token. Access Denied' );
+    throw new UnAuthorizedError('Invalid Token. Access Denied');
   }
 };

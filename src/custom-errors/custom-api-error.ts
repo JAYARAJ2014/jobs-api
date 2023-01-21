@@ -1,4 +1,4 @@
-import { StatusCodes } from "http-status-codes";
+import { StatusCodes } from 'http-status-codes';
 
 export class CustomApiError extends Error {
   constructor(public messsage: string) {
