@@ -3,7 +3,7 @@ import { Router } from 'express';
 import 'express-async-errors';
 import { handleAsync } from '../middlewares/async-handler';
 import { authHandler } from '../handlers/auth-handler';
-import { authMiddleware } from '../middlewares/auth';
+import { authMiddleware } from '../middlewares/auth-middleware';
 import { jobsHandler } from '../handlers/jobs-handler';
 
 export const jobsRouter: Router = Router();

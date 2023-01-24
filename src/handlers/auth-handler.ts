@@ -11,42 +11,47 @@ class AuthHandler {
     if (!username || !password || !email) {
       throw new BadRequestError('Required input is not provided.');
     }
-    
+
     const user = await User.create({ ...req.body });
-    const token = jwt.sign({userId: user._id, name: user.username},process.env.JWT_SECRET as string, {
-      expiresIn: process.env.JWT_LIFE_TIME as string
-    })
+    const token = jwt.sign(
+      { userId: user._id, name: user.username },
+      process.env.JWT_SECRET as string,
+      {
+        expiresIn: process.env.JWT_LIFE_TIME as string
+      }
+    );
     console.log(`User Created:  `, user);
-    return res.status(StatusCodes.OK).json({name:username,token});
+    return res.status(StatusCodes.OK).json({ name: username, token });
   }
   public async login(req: Request, res: Response) {
-
-    const {email, password } = req.body;
-    if ( !password || !email) {
+    const { email, password } = req.body;
+    if (!password || !email) {
       throw new BadRequestError('email / Password must be provided.');
     }
-    
-    const user = await User.findOne({email});
-    if(!user){
-      throw new UnAuthorizedError('User does not exist')
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      throw new UnAuthorizedError('User does not exist');
     }
 
     // Compared the passwords
 
-   const isPasswordsMatching = await bcrypt.compare(password,user.password);
+    const isPasswordsMatching = await bcrypt.compare(password, user.password);
 
-   if (isPasswordsMatching) {
-    const token = jwt.sign({userId: user._id, name: user.username},process.env.JWT_SECRET as string, {
-      expiresIn: process.env.JWT_LIFE_TIME as string
-    })
-    
-   return res.status(StatusCodes.OK).json({name:user.username,token});
-   }
+    if (!isPasswordsMatching) {
+      throw new UnAuthorizedError('Invalid Password');
+    }
 
-   throw new UnAuthorizedError("Invalid Password")
-    
+    const token = jwt.sign(
+      { userId: user._id, name: user.username },
+      process.env.JWT_SECRET as string,
+      {
+        expiresIn: process.env.JWT_LIFE_TIME as string
+      }
+    );
+
+    return res.status(StatusCodes.OK).json({ name: user.username, token });
   }
-  
 }
 
 export const authHandler = new AuthHandler();
