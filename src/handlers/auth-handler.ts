@@ -21,7 +21,7 @@ class AuthHandler {
       }
     );
     console.log(`User Created:  `, user);
-    return res.status(StatusCodes.OK).json( {user: {userId:user._id,  name:username}, token: {token:token}});
+    return res.status(StatusCodes.OK).json( {user: {userId:user._id,  name:username}, token  :token});
   }
   public async login(req: Request, res: Response) {
     const { email, password } = req.body;
