@@ -13,9 +13,9 @@ class JobsHandler {
   }
 
   public async getJob(req: Request, res: Response) {
-    const userId= req.user?.userId;
-    const jobId =req.params.id; 
-    
+    const userId = req.user?.userId;
+    const jobId = req.params.id;
+
     const job = await Job.findOne({ _id: jobId, createdBy: userId });
     if (!job) {
       throw new NotFoundError(`Job Id: ${jobId} does not exist`);

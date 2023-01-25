@@ -9,8 +9,10 @@ import { jobsRouter } from './routers/jobs';
 import { connectDatabase } from './db/connect';
 import helmet from 'helmet';
 import cors from 'cors';
-import {rateLimit} from 'express-rate-limit'
+import { rateLimit } from 'express-rate-limit';
 import xss from 'xss-clean';
+import * as swaggerJSDoc from 'swagger-jsdoc';
+import * as swaggerUi from 'swagger-ui-express';
 
 dotenv.config();
 
@@ -23,7 +25,7 @@ app.use(express.json());
 app.use(rateLimit());
 app.use(helmet());
 app.use(cors());
-app.use(xss())
+app.use(xss());
 
 app.use(`${baseUrl}/auth`, authRouter);
 app.use(`${baseUrl}/jobs`, authMiddleware, jobsRouter);
