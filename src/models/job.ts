@@ -1,21 +1,20 @@
 import mongoose, { ObjectId, Schema, model } from 'mongoose';
 
 export enum JobStatusEnum {
-    Pending="PENDING",
-    Interview="INTERVIEW",
-    Declined="DECLINED"
+  Pending = 'PENDING',
+  Interview = 'INTERVIEW',
+  Declined = 'DECLINED'
 }
 
 export interface IJob {
-    companyName: string;
-    position: string;
-    status: JobStatusEnum;
-    createdBy:ObjectId;
+  companyName: string;
+  position: string;
+  status: JobStatusEnum;
+  createdBy: ObjectId;
 }
 
-
-
-const JobSchema = new Schema<IJob>({
+const JobSchema = new Schema<IJob>(
+  {
     companyName: {
       type: String,
       required: [true, 'Please provide a name'],
@@ -36,10 +35,12 @@ const JobSchema = new Schema<IJob>({
       default: JobStatusEnum.Pending
     },
     createdBy: {
-        type: mongoose.Types.ObjectId,
-        ref:'User',
-        required: [true, 'User id required']
+      type: mongoose.Types.ObjectId,
+      ref: 'User',
+      required: [true, 'User id required']
     }
-  },{timestamps:true});
+  },
+  { timestamps: true }
+);
 
-  export const Job = model<IJob>('Job',JobSchema);
+export const Job = model<IJob>('Job', JobSchema);

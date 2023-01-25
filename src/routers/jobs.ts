@@ -11,4 +11,4 @@ jobsRouter.get('/', handleAsync(jobsHandler.getAllJobs));
 jobsRouter.post('/', handleAsync(jobsHandler.createJob));
 jobsRouter.get('/:id', handleAsync(jobsHandler.getJob));
 // jobsRouter.post('/jobs', handleAsync(jobsHandler.deleteJob));
-// jobsRouter.post('/jobs', handleAsync(jobsHandler.updateJob));
+jobsRouter.patch('/:id', handleAsync(jobsHandler.updateJob));

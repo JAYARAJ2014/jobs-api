@@ -7,7 +7,6 @@ export const authMiddleware = async (
   res: Response,
   next: NextFunction
 ) => {
-  
   const { authorization } = req.headers;
   console.log(authorization);
   if (!authorization || !authorization.startsWith('Bearer')) {
@@ -16,11 +15,14 @@ export const authMiddleware = async (
   }
 
   const token = authorization.substring(7);
- 
+
   try {
-    var payload: JwtPayload = await jwt.verify(token, process.env.JWT_SECRET as string ) as JwtPayload;
-    console.log(`Payload: `, typeof(payload))
-    req.user = {userId: payload.userId, username: payload.name};
+    var payload: JwtPayload = (await jwt.verify(
+      token,
+      process.env.JWT_SECRET as string
+    )) as JwtPayload;
+    console.log(`Payload: `, typeof payload);
+    req.user = { userId: payload.userId, username: payload.name };
 
     // console.log(req.user);
     next();

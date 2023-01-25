@@ -18,7 +18,7 @@ const baseUrl: string = `/api/v1`;
 app.use(express.json());
 
 app.use(`${baseUrl}/auth`, authRouter);
-app.use(`${baseUrl}/jobs`,authMiddleware, jobsRouter);
+app.use(`${baseUrl}/jobs`, authMiddleware, jobsRouter);
 
 app.get('/', (req: Request, res: Response) => {
   return res.status(StatusCodes.OK).json({ message: 'Jobs API' });
