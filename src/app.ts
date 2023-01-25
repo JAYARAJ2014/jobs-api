@@ -11,8 +11,6 @@ import helmet from 'helmet';
 import cors from 'cors';
 import { rateLimit } from 'express-rate-limit';
 import xss from 'xss-clean';
-import * as swaggerJSDoc from 'swagger-jsdoc';
-import * as swaggerUi from 'swagger-ui-express';
 
 dotenv.config();
 
