@@ -71,7 +71,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\":\"Jeena\",\n    \"email\": \"jeena@gmail.com\",\n    \"password\" : \"hello123$\"\n}",
+					"raw": "{\n    \"username\":\"Roby\",\n    \"email\": \"roby@gmail.com\",\n    \"password\" : \"hello123$\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -159,7 +159,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"companyName\" : \"Netflix\",\n    \"position\" : \"Sr Solutions Architect\"\n}",
+					"raw": "{\n    \"companyName\" : \"Fuji Film\",\n    \"position\" : \"Developer\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -173,6 +173,99 @@
 					],
 					"path": [
 						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Job",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/jobs/63d07ec3452f45a32edda48e",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"jobs",
+						"63d07ec3452f45a32edda48e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Job",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/jobs/63d07ec3452f45a32edda48e",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"jobs",
+						"63d07ec3452f45a32edda48e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Job",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"companyName\" : \"HogerWap\",\n    \"position\" : \"Player\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/jobs/63cf5ba8639030e181109215",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"jobs",
+						"63cf5ba8639030e181109215"
 					]
 				}
 			},
